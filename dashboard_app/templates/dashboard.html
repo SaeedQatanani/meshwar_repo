@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/nav_bar_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <title>Dashboard</title>
+</head>
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <div class="logo">
+                <a href="/dashboard/"><img src="{% static 'images/logo.png' %}" alt="logo"></a>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/dashboard/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/dashboard/profile/{{request.session.id}}/">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/new/">Create</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/about/">About Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cities</a>
+                            <ul class="dropdown-menu">
+                                {% for city in all_cities %}
+                                <li><a class="dropdown-item" href="/dashboard/{{city.id}}/">{{city.name}}</a></li>
+                                {% endfor %}
+                            </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/dashboard/random/">Random</a>
+                    </li>
+                </ul>
+                <a href="/logout/" class="logout">Logout</a>
+                <!-- <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-dark" type="submit">Search</button>
+                </form> -->
+            </div>
+        </div>
+    </nav>
+    <div class="row-md-9"></div>
+    <div class="row">
+
+        <div class="col-md-4">
+            <a href="/dashboard/1/">
+                <div class="card my-2">
+                    <img class="imge-thumbnail" src="{% static 'images/cities/ramallah.jpg' %}"alt="Card image cap">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">Ramallah</h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/dashboard/2/">
+                <div class="card my-2">
+                    <img class="imge-thumbnail" src="{% static 'images/cities/bethlehem.jpg' %}"alt="Card image cap">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">Bethlehem</h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/dashboard/3/">
+                <div class="card my-2">
+                    <img class="imge-thumbnail" src="{% static 'images/cities/hebron.png' %}"alt="Card image cap">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">Hebron</h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/dashboard/4/">
+                <div class="card my-2">
+                    <img class="imge-thumbnail" src="{% static 'images/cities/jericho.jpg' %}"alt="Card image cap">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">Jericho</h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/dashboard/5/">
+                <div class="card my-2">
+                    <img class="imge-thumbnail" src="{% static 'images/cities/nablus.jpg' %}"alt="Card image cap">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">Nablus</h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <div class="col-md-4">
+            <a href="/dashboard/6/">
+                <div class="card my-2">
+                    <img class="imge-thumbnail" src="{% static 'images/cities/gaza.jpg' %}"alt="Card image cap">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">Gaza</h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/dashboard/7/">
+                <div class="card my-2">
+                    <img class="imge-thumbnail" src="{% static 'images/cities/jenin.jpg' %}"alt="Card image cap">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">Jenin</h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <div class="col-md-4">
+            <a href="/dashboard/8/">
+                <div class="card my-2">
+                    <img class="imge-thumbnail" src="{% static 'images/cities/Jerusalem.png' %}"alt="Card image cap">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">Jerusalem</h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/dashboard/9/">
+                <div class="card my-2">
+                    <img class="imge-thumbnail" src="{% static 'images/cities/tulkarem.jpg' %}"alt="Card image cap">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">Tulkarem</h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/dashboard/10/">
+                <div class="card my-2">
+                    <img class="imge-thumbnail" src="{% static 'images/cities/Salfit.jpg' %}"alt="Card image cap">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">Salfit</h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="/dashboard/11/">
+                <div class="card my-2">
+                    <img class="imge-thumbnail" src="{% static 'images/cities/qalqilya.jpg' %}"alt="Card image cap">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h4 class="card-title">Qalqilya</h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+    <footer id="footer">
+        <div class="container">
+            <section class="accounts">
+                <!-- Facebook -->
+                <a class="btn btn-floating m-1" href="#!" role="button"><img class="social-icon" src="{% static 'images/facebook.png' %}" alt="facebook"></a>
+                <!-- Twitter -->
+                <a class="btn btn-floating m-1" href="#!" role="button"><img class="social-icon" src="{% static 'images/twitter.png' %}" alt="twitter"></a>
+                <!-- Instagram -->
+                <a class="btn btn-floating m-1" href="#!" role="button"><img class="social-icon" src="{% static 'images/instagram.png' %}" alt="instagram"></a>
+            </section>
+            <div class="copyright">
+                &copy; Copyright <strong>Meshwar</strong>. All Rights Reserved
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

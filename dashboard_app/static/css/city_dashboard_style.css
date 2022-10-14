@@ -1,0 +1,56 @@
+main {
+    margin-top: 20px;
+}
+body {
+    background-color: #f5f5f5;          
+}
+h1, h5 {
+    color: #326B9A;
+}
+h6 {
+    color: #FF4949;
+    font-size: 0.95rem;
+    line-height: 25px;
+}
+h4 {
+    color: #FF4949;
+    margin: 50px 0 30px 0;
+}
+.all-activities {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.card {
+    width: 25rem;
+    margin: 1%;
+    box-shadow: 4px 4px 3px 3px lightgray;
+}
+@media all and (max-width: 1000px) {
+    .all-activities {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    .card {
+        width: 90%;
+        margin: 1%;
+    }
+}
+.desc {
+    height: 50px;
+    white-space: wrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.card-link {
+    line-height: 40px;
+}
+.btn-primary, .btn-primary:active, .btn-primary:visited {
+    background-color: #FF4949;
+    border: none;
+}
+.btn-primary:hover {
+    background-color: #326B9A;
+    border: none;
+}

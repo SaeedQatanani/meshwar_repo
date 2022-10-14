@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{city.name}}</title>
+    {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/nav_bar_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/city_dashboard_style.css' %}">
+</head>
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <div class="logo">
+                <a href="/dashboard/"><img src="{% static 'images/logo.png' %}" alt="logo"></a>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/dashboard/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/dashboard/profile/{{request.session.id}}/">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/new/">Create</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/about/">About Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cities</a>
+                            <ul class="dropdown-menu">
+                                {% for city in all_cities %}
+                                <li><a class="dropdown-item" href="/dashboard/{{city.id}}/">{{city.name}}</a></li>
+                                {% endfor %}
+                            </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/dashboard/random/">Random</a>
+                    </li>
+                </ul>
+                    <a href="/logout/" class="logout">Logout</a>
+                <!-- <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-dark" type="submit">Search</button>
+                </form> -->
+            </div>
+        </div>
+    </nav>
+    <main>
+        <h1 class="text-center">{{city.name}}</h1>
+        {% if city_activities %}
+        <div class="container all-activities">
+            {% for activity in city_activities %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ activity.title }}</h5>
+                    <h6 class="card-subtitle mb-2">Added by: {{ activity.added_by.first_name }} {{ activity.added_by.last_name }}</h6>
+                    <div class="desc">
+                        <p class="card-text">{{ activity.desc }}</p>
+                    </div>
+                    <a href="/dashboard/show/{{activity.id}}/" class="card-link">See more</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center">
+            <h4>There are no activities to show in this city</h4>
+            <a href="/dashboard/new/" class="btn btn-primary">Add an activity!</a>
+        </div>
+        {% endif %}
+    </main>
+    <footer id="footer">
+        <div class="container">
+            <section class="accounts">
+                <!-- Facebook -->
+                <a class="btn btn-floating m-1" href="#!" role="button"><img class="social-icon" src="{% static 'images/facebook.png' %}" alt="facebook"></a>
+                <!-- Twitter -->
+                <a class="btn btn-floating m-1" href="#!" role="button"><img class="social-icon" src="{% static 'images/twitter.png' %}" alt="twitter"></a>
+                <!-- Instagram -->
+                <a class="btn btn-floating m-1" href="#!" role="button"><img class="social-icon" src="{% static 'images/instagram.png' %}" alt="instagram"></a>
+            </section>
+            <div class="copyright">
+                &copy; Copyright <strong>Meshwar</strong>. All Rights Reserved
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

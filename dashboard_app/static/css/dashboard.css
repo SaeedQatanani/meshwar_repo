@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body{
+    background-color: #f5f5f5;
+}
+
+.row{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.col-md-4{
+    width: 450px;
+}
+
+.col-md-4 a{
+    text-decoration: none;
+    color: #FF4949;
+}
+
+.my-2 img{
+    height: 250px;
+    width: 100%;
+}
+
+.card-body h4{
+    font-size: 30px;
+    color: #FF4949;
+    font-weight: bold;
+}

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+    <header>
+        <img src="{% static 'images/logo-navy.png' %}" alt="meshwar logo">
+    </header>
+    <main>
+        <div class="container login-reg">
+            <h2 class="text-center">Registration</h2>
+            <form action="/add/" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="fname" class="form-label">First Name</label>
+                    <input type="text" name="first_name" id="fname" class="form-control">             
+                </div>
+                <div class="mb-3">
+                    <label for="lname" class="form-label">Last Name</label>
+                    <input type="text" name="last_name" id="lname" class="form-control">             
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" name="email" id="email" class="form-control">    
+                    <div hidden class="registrationFormAlert" id="check-email"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="DOB" class="form-label">Birthday</label>
+                    <input type="date" name="birthday" id="DOB" class="form-control">             
+                </div>
+                <div class="mb-3">
+                    <label for="pw" class="form-label">Password</label>
+                    <input type="password" name="password" id="pw" class="form-control">             
+                </div>
+                <div class="mb-3">
+                    <label for="confirm_pw" class="form-label">Confirm Password</label>
+                    <input type="password" name="confirm_pw" id="confirm_pw" class="form-control">
+                    <div  class="registrationFormAlert" id="matches"></div>
+                    <div  class="registrationFormAlert" id="doesnt-match"></div>
+                </div>
+                <div class="text-center">
+                    <input type="submit" value="Register" class="btn btn-primary shadow-sm rounded">
+                </div>
+            </form>
+        </div>
+        <div class="container login-reg">
+            <h2 class="text-center">Login</h2>
+            <form action="/login/" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="login-email" class="form-label">Email</label>
+                    <input type="text" name="login_email" id="login-email" class="form-control">             
+                </div>
+                <div class="mb-3">
+                    <label for="login-pw" class="form-label">Password</label>
+                    <input type="password" name="login_password" id="login-pw" class="form-control">             
+                </div>
+                <div class="text-center">
+                    <input type="submit" value="Log In" class="btn btn-primary shadow-sm rounded">
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer>
+        {% if messages %}
+        <div class="alert alert-danger" role="alert">
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    {% block javascript %}
+    <script type="text/javascript">        
+        $(document).ready(function () {        
+            
+        $("#email").keyup(function () {
+            var inputvalues = $("#email").val();    
+        if(inputvalues==""){ //to remove the error if input is empty
+            $("#check-email").attr("hidden",true);
+        }
+            else{ //else check the regex if valid or not
+                var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                if(!regex.test(inputvalues)){ //if regex is is invalid give a text error message
+                    $("#check-email").removeAttr("hidden");
+                    $("#check-email").text("Invalid email address!");
+                }
+                else{ //else hide the #check-email tag error message
+                    $("#check-email").attr("hidden",true);
+                }
+                }
+            });
+        $("#confirm_pw").keyup(function(){
+            var password = $("#pw").val();
+            var confirm_pw = $("#confirm_pw").val();
+            if(password==="" && confirm_pw===""){
+            $("#matches").attr("hidden",true);
+            $("#doesnt-match").attr("hidden",true);
+        }
+            else{
+                if (password != confirm_pw){
+                    $("#doesnt-match").text("Passwords do not match!");
+                    $("#doesnt-match").removeAttr("hidden");
+                    $("#matches").attr("hidden",true);
+                }
+                else{
+                    $("#matches").text("Passwords match.");
+                    $("#matches").removeAttr("hidden");
+                    $("#doesnt-match").attr("hidden",true);
+                }
+            }
+        });
+        $("#pw").keyup(function(){
+            var password = $("#pw").val();
+            var confirm_pw = $("#confirm_pw").val();
+            if(password==="" && confirm_pw===""){
+            $("#matches").attr("hidden",true);
+            $("#doesnt-match").attr("hidden",true);
+        }
+            else{
+                if (password != confirm_pw){
+                    $("#doesnt-match").text("Passwords do not match!");
+                    $("#doesnt-match").removeAttr("hidden");
+                    $("#matches").attr("hidden",true);
+                }
+                else{
+                    $("#matches").text("Passwords match.");
+                    $("#matches").removeAttr("hidden");
+                    $("#doesnt-match").attr("hidden",true);
+                }
+            }
+        });
+        $("#email").keyup(function () {
+            var email = $(this).val();
+            $.ajax({
+                url: '/ajax/validate_email/',
+                data: {
+                    'email': email
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.is_taken) {
+                        $("#check-email").removeAttr("hidden");
+                        $("#check-email").text("Email already exists!");
+                    }
+                }
+            });
+        });
+        });            
+        </script>
+        {% endblock %}
+</body>
+</html>

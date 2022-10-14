@@ -1,0 +1,51 @@
+h1 {
+    margin: 50px;
+}
+h2 {
+    margin: 30px;
+}
+h1, h2, h3, h5, h6 {
+    color: #326B9A;
+    font-weight: 900;
+}
+h4 {
+    color: #FF4949;
+}
+.about-text {
+    text-align: justify;
+    text-justify: inter-word;
+    width: 60%;
+    background-color: white;
+    padding: 20px;
+    color: #326B9A;
+    font-weight: 600;
+    border-radius: 20px;
+    margin: 0 auto;
+}
+@media all and (max-width: 1080px) {
+    .about-text {
+        width: 95%;
+    }
+    .team-members {
+        display:flex;
+        flex-direction: column;
+    }
+}
+span {
+    color: #FF4949;
+    font-size: 1.4rem;
+}
+.team-members {
+    display: flex;
+    justify-content: space-evenly;
+}
+.team-member {
+    margin: 20px;
+}
+.profile-pic {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 3px #E0FF4F solid;
+    margin-bottom: 20px;
+}

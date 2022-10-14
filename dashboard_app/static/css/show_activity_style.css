@@ -1,0 +1,70 @@
+h2 {
+    color: #326B9A;
+    padding-bottom: 5px;
+}
+
+.card-subtitle {
+    color: #FF4949;
+}
+h5 {
+    color: #10316B;
+    padding-bottom: 5px;
+}
+.container {
+    margin: 0 auto;
+}
+.card {
+    width: 60%;
+    height: 70%;
+    margin: 0 auto;
+    box-shadow: 4px 4px 3px 3px lightgray;
+}
+.card-text {
+    margin-top: 20px;
+}
+.dates {
+    display: flex;
+    align-items: center;
+}
+.vote {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 10%;
+    margin-top: 10px;
+}
+@media all and (max-width: 1000px) {
+    .card {
+        width: 90%;
+        margin: 1%;
+    }
+}
+@media all and (max-width: 720px) {
+.vote {
+    width: 15%;
+}
+}
+.calendar-img {
+    width: 27px;
+    margin-right: 5px;
+    padding-bottom: 7px;
+}
+.vote img {
+    width: 30px;
+}
+.vote span {
+    font-size: 0.8rem;
+}
+.shadow{
+    position: relative;
+    bottom: 5px;
+}
+.down{
+    position: relative;
+    top: 5px;
+}
+.settings_vote{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
